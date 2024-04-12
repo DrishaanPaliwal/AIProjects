@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn import linear_model
 import pandas as pd
-
+import matplotlib.pyplot as plt
 #md1 = pd.read_csv("PCOSTrain.csv")
 md2 = pd.read_csv("VgSalesTrain.csv")
 md2
@@ -37,17 +37,27 @@ if a == 3:
     bh = float(input("Enter the Number of Bedrooms + Hall + Kitchen in your house (BHk): "))
     bah = float(input("Enter the Number of Bathrooms in your House: "))
     ag = float(input("Enter the Age of your House: "))
+    
     prf = reg3.predict([[ar , bh , bah , ag]])
     print("Your House is worth ", prf, "rupees (in lacs)")
+    plt.xlabel('area (sqft)')
+    plt.ylabel('price (Rs. In Lacs)')
+    plt.scatter(md3.Area, md3.Price, color='red',marker='+')
+    plt.show()
 elif a == 2:
     init = int(input("Hello! This is the VGSales model, I will help you forecast the sales of your game in a region based on how it has performed in other regions. \n Enter 1 for NA Prediction \n Enter 2 for EU Prediction \n Enter 3 for Japan Prediciton \n Enter 4 for Prediction in APAC Prediction"))
     if init == 1:
         EU = float(input("Enter your EU Sales"))
         #JP = float(input("Enter your JP Sales"))
         APAC = float (input("Enter your APAC Sales"))
+        
         VGSalesF = reg21.predict([[EU , APAC]])
+        
         print("The Sales Forecast is ", VGSalesF, "(in millions)")
-
+        plt.xlabel('NA Sales (in millions)')
+        plt.ylabel('Global Sales (in millions)')
+        plt.scatter(md2.Global_Sales, md2.NA_Sales, color='red',marker='+')
+        plt.show()
 else:
     print("Out of Service")
     
